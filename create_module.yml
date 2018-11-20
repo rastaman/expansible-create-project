@@ -1,0 +1,9 @@
+---
+- name: Create module
+  hosts: localhost
+  tasks:
+    - name: Create a module
+      create_module:
+        name: "fail me"
+        playbook: "{{ playbook_dir }}/create_module.yml"
+        new: true

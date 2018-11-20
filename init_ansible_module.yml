@@ -1,0 +1,46 @@
+---
+- name: Initialize new ansible modules
+  hosts: localhost
+  vars:
+    output_dir: "{{ playbook_dir }}/extra_modules"
+    module_path: "{{ output_dir }}/plugins/modules"
+    #module_path: "{{ output_dir }}/lib/ansible/modules"
+    module_utils_path: "{{ output_dir }}/plugins/module_utils"
+    #module_utils_path: "{{ output_dir }}/lib/ansible/module_utils"
+    category: source_control
+    topic: bitbucket
+    modules:
+    - "{{ topic }}_user"
+    - "{{ topic }}_project"
+    - "{{ topic }}_group"
+    version: "0.1"
+    ansible_version_added: "n/a"
+    author: "L.Maître/Effervens SARL (lmaitre@effervens.com)"
+  tasks:
+  - name: Create folders
+    file:
+      path: "{{ item }}"
+      state: directory
+    with_items:
+      - "{{ module_path }}/{{ category}}/{{ topic }}"
+      - "{{ module_utils_path }}"
+      - "{{ output_dir }}/lib/ansible/utils/module_docs_fragments"
+
+  - name: Init files     
+    file:
+      path: "{{ item }}"
+      state: touch
+    with_items:
+      - "{{ module_path }}/{{ category}}/{{ topic }}/__init__.py"
+      - "{{ module_utils_path }}/{{ topic }}.py"
+      - "{{ output_dir }}/lib/ansible/utils/module_docs_fragments/{{ topic }}.py"
+  - name: Init modules
+    template:
+      src: "{{ playbook_dir }}/templates/module.py.j2"
+      dest: "{{ module_path }}/{{ category}}/{{ topic }}/{{ item }}.py"
+    with_items: "{{ modules }}"
+
+# - An empty file to initialize namespace and allow Python to import the files. Required new file
+#lib/ansible/modules/$category/$topic/$yourfirstmodule.py - A single module. Required new file
+#lib/ansible/utils/module_docs_fragments/$topic.py - Code documentation, such as details regarding common arguments. Optional new file
+#lib/ansible/module_utils/$topic.py - Code shared between more than one module, such as common arguments. Optional new file
