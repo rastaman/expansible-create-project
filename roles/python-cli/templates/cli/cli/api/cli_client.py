@@ -4,7 +4,7 @@ import requests
 from requests.auth import HTTPBasicAuth
 
 
-class {{ template_name | capitalize }}Client:
+class {{ template_name_capitalized }}Client:
 
     def __init__(self, configuration):
         self.configuration = configuration

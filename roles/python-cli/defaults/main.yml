@@ -1,7 +1,8 @@
 ---
 # defaults file for roles/python-cli
 template_name: github-fork-cleaner
-
+python_template_name: "{{ template_name | replace('-','_') }}"
+template_name_capitalized: "{{ template_name | replace('-',' ') | capitalize | replace (' ','') }}"
 author: Ludovic Maître
 author_email: rastaman@github.com
 scm_url: https://github.com/rastaman/{{ template_name }}-cli

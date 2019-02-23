@@ -3,7 +3,7 @@
 
 import json
 from .base import Base
-from {{ template_name }}.api.{{ template_name }}_client import {{ template_name | capitalize }}Client
+from {{ python_template_name }}.api.{{ python_template_name }}_client import {{ template_name_capitalized }}Client
 
 
 class Session(Base):
@@ -11,7 +11,7 @@ class Session(Base):
 
     def run(self):
         #print('You supplied the following options:', json.dumps(self.options, indent=2, sort_keys=True))
-        self.{{ template_name }}_client = {{ template_name | capitalize }}Client(self.loadConfiguration())
+        self.{{ python_template_name }}_client = {{ template_name_capitalized }}Client(self.loadConfiguration())
         if self.hasOption('login'):
             self.login()
         elif self.hasOption('logout'):
@@ -26,17 +26,17 @@ class Session(Base):
         username = self.options['<username>']
         password = self.options['<password>']
 
-        rc = self.{{ template_name }}_client.login(url, username, password)
+        rc = self.{{ python_template_name }}_client.login(url, username, password)
 
         if rc == 200:
-            self.saveConfiguration(self.{{ template_name }}_client.getConfiguration())
+            self.saveConfiguration(self.{{ python_template_name }}_client.getConfiguration())
         self.processResultCode(rc)
 
     def logout(self):
-        rc = self.{{ template_name }}_client.logout()
+        rc = self.{{ python_template_name }}_client.logout()
         self.processResultCode(rc)
 
     def dump(self):
-        configuration = self.{{ template_name }}_client.getConfiguration()
+        configuration = self.{{ python_template_name }}_client.getConfiguration()
         print(json.dumps(configuration))
 

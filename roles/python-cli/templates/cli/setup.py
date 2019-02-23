@@ -8,7 +8,7 @@ from subprocess import call
 
 from setuptools import Command, find_packages, setup
 
-from {{ template_name }} import __version__
+from {{ python_template_name }} import __version__
 
 
 this_dir = abspath(dirname(__file__))
@@ -36,7 +36,7 @@ class RunTests(Command):
 setup(
     name='{{ template_name }}',
     version=__version__,
-    description='A command line client for {{ template_name | capitalize }}.',
+    description='A command line client for {{ template_name_capitalized }}.',
     long_description=long_description,
     url='{{ scm_url }}',
     author='{{ author }}',
@@ -64,7 +64,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            '{{ template_name }}={{ template_name }}.cli:main',
+            '{{ template_name }}={{ python_template_name }}.cli:main',
         ],
     },
     cmdclass={'test': RunTests},

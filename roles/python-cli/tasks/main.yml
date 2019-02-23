@@ -4,15 +4,15 @@
   with_items:
   - { src: ../templates/cli, destination: "{{ dest }}" }
   - { src: ../templates/cli/docs, destination: "{{ dest }}/docs" }
-  - { src: ../templates/cli/cli, destination: "{{ dest }}/{{ template_name }}" }
-  - { src: ../templates/cli/cli/api, destination: "{{ dest }}/{{ template_name }}/api" }
-  - { src: ../templates/cli/cli/commands, destination: "{{ dest }}/{{ template_name }}/commands" }
+  - { src: ../templates/cli/cli, destination: "{{ dest }}/{{ python_template_name }}" }
+  - { src: ../templates/cli/cli/api, destination: "{{ dest }}/{{ python_template_name }}/api" }
+  - { src: ../templates/cli/cli/commands, destination: "{{ dest }}/{{ python_template_name }}/commands" }
   - { src: ../templates/cli/tests, destination: "{{ dest }}/tests" }
   - { src: ../templates/cli/tests/commands, destination: "{{ dest }}/tests/commands" }
   loop_control:
     loop_var: folder
 - name: Rename client file
-  command: "mv {{ dest }}/{{ template_name }}/api/cli_client.py {{ dest }}/{{ template_name }}/api/{{ template_name }}_client.py"
+  command: "mv {{ dest }}/{{ python_template_name }}/api/cli_client.py {{ dest }}/{{ python_template_name }}/api/{{ python_template_name }}_client.py"
   args:
-    creates: "{{ dest }}/{{ template_name }}/api/{{ template_name }}_client.py"
-    removes: "{{ dest }}/{{ template_name }}/api/cli_client.py"
+    creates: "{{ dest }}/{{ python_template_name }}/api/{{ python_template_name }}_client.py"
+    removes: "{{ dest }}/{{ python_template_name }}/api/cli_client.py"
