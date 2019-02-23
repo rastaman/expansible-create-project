@@ -1,3 +1,6 @@
 virtualenv
 .vscode
 work
+.project
+.pydevproject
+.settings/

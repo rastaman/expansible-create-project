@@ -1,0 +1,11 @@
+---
+- name: Create folder if needed
+  file:
+    path: "{{ folder.destination }}"
+    state: directory
+- name: Apply templates
+  template:
+    src: "{{ item }}"
+    dest: "{{ folder.destination }}/{{ item | basename }}"
+  with_fileglob:
+    - "{{ folder.src }}/*"

@@ -1,0 +1,17 @@
+.cache
+.coverage
+*.egg-info
+build
+dist
+.env
+virtualenv
+.project
+.pydevproject
+.settings
+*.pyc
+INSTALL.md
+.venv
+venv
+work/
+api_token.txt
+.vscode

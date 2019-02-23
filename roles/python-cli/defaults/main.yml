@@ -1,0 +1,7 @@
+---
+# defaults file for roles/python-cli
+template_name: github-fork-cleaner
+
+author: Ludovic Maître
+author_email: rastaman@github.com
+scm_url: https://github.com/rastaman/{{ template_name }}-cli

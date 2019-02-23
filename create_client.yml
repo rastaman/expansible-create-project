@@ -1,0 +1,20 @@
+---
+# Description: Create a new python client
+# Usage:
+# $ ansible-playbook create_client.yml -e application=my-app
+- hosts: localhost
+  vars:
+    application: github-repo-cleaner
+    workdir: "{{ playbook_dir }}/work/{{ application }}"
+  pre_tasks:
+    - name: Create work folder
+      file:
+        path: "{{ workdir }}"
+        state: "{{ item }}"
+      with_items:
+        - absent
+        - directory
+  roles:
+    - role: python-cli
+      template_name: "{{ application }}"
+      dest: "{{ workdir }}"
