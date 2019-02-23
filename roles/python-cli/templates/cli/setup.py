@@ -41,7 +41,7 @@ setup(
     url='{{ scm_url }}',
     author='{{ author }}',
     author_email='{{ author_email }}',
-    license='WTFPL',
+    license='MIT',
     classifiers=[
         'Intended Audience :: Developers',
         'Topic :: Utilities',
